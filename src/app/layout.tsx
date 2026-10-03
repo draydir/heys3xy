@@ -23,21 +23,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://heys3xy.com";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "#7399 — S3XY cipher",
+    default: "#7399",
     template: "%s · #7399",
   },
-  description:
-    "#7399: T9 keypad letters S-E-X-Y, Tesla model line S·3·X·Y, and the heys3xy signal. One page. One number. Transmit if you must.",
-  keywords: [
-    "7399",
-    "#7399",
-    "SEXY",
-    "T9",
-    "S3XY",
-    "Tesla S 3 X Y",
-    "heys3xy",
-    "heys3xy.com",
-  ],
+  description: "#7399 · heys3xy.com",
+  keywords: ["7399", "#7399", "heys3xy", "S3XY"],
   authors: [{ name: "heys3xy" }],
   creator: "heys3xy",
   openGraph: {
@@ -45,14 +35,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "#7399",
-    title: "#7399 — S3XY cipher",
-    description:
-      "Seven-three-nine-nine: keypad slang, model letters, domain whisper. Obscure on purpose.",
+    title: "#7399",
+    description: "hey",
   },
   twitter: {
     card: "summary",
     title: "#7399",
-    description: "S·E·X·Y on a phone. S·3·X·Y on a lot. heys3xy.com",
+    description: "7399",
   },
   robots: { index: true, follow: true },
   alternates: { canonical: siteUrl },
@@ -66,9 +55,8 @@ const jsonLd = {
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
       name: "#7399",
-      alternateName: ["7399", "SEXY T9", "S3XY", "heys3xy"],
-      description:
-        "Minimal site for the #7399 cipher: telephone keypad SEXY and Tesla lineup letters S, 3, X, Y.",
+      alternateName: ["7399", "S3XY", "heys3xy"],
+      description: "#7399",
       inLanguage: "en",
     },
     {
@@ -79,9 +67,7 @@ const jsonLd = {
       isPartOf: { "@id": `${siteUrl}/#website` },
       about: {
         "@type": "Thing",
-        name: "7399 numeric cipher",
-        description:
-          "Maps to T9 SEXY and to Tesla model designations S, Model 3, Model X, Model Y.",
+        name: "7399",
       },
     },
   ],

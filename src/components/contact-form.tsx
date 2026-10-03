@@ -54,14 +54,12 @@ export const ContactForm = () => {
       className="mx-auto flex w-full max-w-md flex-col gap-4"
       aria-labelledby="contact-heading"
     >
-      <div className="space-y-1 text-center">
-        <h2 id="contact-heading" className="font-tesla text-lg tracking-[0.25em]">
-          TRANSMIT
-        </h2>
-        <p className="text-xs text-muted-foreground">
-          Postmark to info@heys3xy.com; Telegram via @velocity_thinking_bot hub.
-        </p>
-      </div>
+      <h2
+        id="contact-heading"
+        className="text-center font-tesla text-lg tracking-[0.25em]"
+      >
+        TRANSMIT
+      </h2>
 
       <div className="grid gap-2">
         <Label htmlFor="name">Name</Label>
@@ -105,7 +103,7 @@ export const ContactForm = () => {
         )}
         role="status"
       >
-        {status === "ok" ? "Received. Probably." : error}
+        {status === "ok" ? "ok" : error}
       </p>
     </form>
   );

@@ -50,14 +50,6 @@ export const HeroSection = () => {
           #7399
         </motion.h1>
 
-        <motion.p
-          className="max-w-md text-sm text-muted-foreground"
-          initial={{ opacity: 0 }}
-          animate={loaded ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 0.55, duration: 0.8 }}
-        >
-          Seven · three · nine · nine — the keypad spells what the domain whispers.
-        </motion.p>
       </motion.div>
 
       {!loaded ? (
