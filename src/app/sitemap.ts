@@ -1,27 +1,27 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://heys3xy.com";
+import { LEGAL_DOCS } from "@/lib/legal-content";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
   return [
     {
-      url: siteUrl,
-      lastModified,
+      url: SITE_URL,
+      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,
     },
     {
-      url: `${siteUrl}/privacy`,
-      lastModified,
-      changeFrequency: "yearly",
-      priority: 0.3,
+      url: `${SITE_URL}/llms`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.2,
     },
-    {
-      url: `${siteUrl}/terms`,
-      lastModified,
-      changeFrequency: "yearly",
+    ...LEGAL_DOCS.map((doc) => ({
+      url: `${SITE_URL}/${doc.slug}`,
+      lastModified: new Date(doc.updated),
+      changeFrequency: "yearly" as const,
       priority: 0.3,
-    },
+    })),
   ];
 }

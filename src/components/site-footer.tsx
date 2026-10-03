@@ -34,7 +34,7 @@ export const SiteFooter = () => {
             <Link href="/terms" className={footerLinkClass}>
               terms
             </Link>
-            <Link href="/llms.txt" className={footerLinkClass} prefetch={false}>
+            <Link href="/llms" className={footerLinkClass}>
               llms
             </Link>
           </nav>

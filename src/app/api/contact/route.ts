@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 
 import { NextResponse } from "next/server";
 
-import { CONTACT_METHOD_CONFIG, isEmail } from "@/lib/contact-methods";
+import { CONTACT_METHOD_CONFIG, contactLinkFor, isEmail } from "@/lib/contact-methods";
 import { contactSchema } from "@/lib/contact-schema";
 import { isPostmarkConfigured, sendContactEmail } from "@/lib/postmark";
 import {
@@ -112,19 +112,28 @@ export const POST = async (request: Request) => {
 
   const methodLabel = CONTACT_METHOD_CONFIG[method].label;
   const replyTo = isEmail(handle) ? handle : undefined;
+  const link = contactLinkFor(method, handle);
 
   const telegramText = [
     "📬 #7399 contact",
     "",
     `From: ${name}`,
-    `Reach via ${methodLabel}: ${handle}`,
+    `Reach via ${methodLabel}: ${link.display}`,
+    ...(link.url ? [`Open: ${link.url}`] : []),
     "",
     message,
   ].join("\n");
 
   const [emailOk, telegram] = await Promise.all([
     isPostmarkConfigured()
-      ? sendContactEmail({ fromName: name, methodLabel, handle, replyTo, message })
+      ? sendContactEmail({
+          fromName: name,
+          methodLabel,
+          handle: link.display,
+          url: link.url,
+          replyTo,
+          message,
+        })
       : Promise.resolve(true),
     isPersonalTelegramNotifyConfigured()
       ? sendPersonalTelegramNotify(telegramText, "heys3xy")

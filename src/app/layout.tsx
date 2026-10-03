@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SITE_URL } from "@/lib/site";
 
 import "./globals.css";
 
@@ -23,7 +24,7 @@ const teslaLike = Montserrat({
   weight: ["500", "600", "700"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://heys3xy.com";
+const siteUrl = SITE_URL;
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -101,6 +102,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM site summary" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM full text" />
       </head>
       <body className="flex min-h-dvh flex-col bg-background pr-[env(safe-area-inset-right)] pl-[env(safe-area-inset-left)] text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

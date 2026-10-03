@@ -158,6 +158,66 @@ export const getHandleError = (method: ContactMethod, raw: string): string | nul
   }
 };
 
+const toE164ish = (value: string): string => `+${value.replace(/\D/g, "")}`;
+
+const stripAt = (value: string): string => encodeURIComponent(value.replace(/^@/, ""));
+
+export interface ContactLink {
+  /** Handle normalized so Telegram auto-links it (E.164-style phones, emails). */
+  display: string;
+  /** Deep link that opens a chat/profile on the chosen channel, when one exists. */
+  url: string | null;
+}
+
+export const contactLinkFor = (method: ContactMethod, raw: string): ContactLink => {
+  const value = raw.trim();
+  const phone = isPhone(value);
+
+  switch (method) {
+    case "email":
+      return { display: value, url: null };
+    case "whatsapp":
+      return { display: toE164ish(value), url: `https://wa.me/${value.replace(/\D/g, "")}` };
+    case "telegram":
+      return { display: `@${value.replace(/^@/, "")}`, url: `https://t.me/${stripAt(value)}` };
+    case "signal":
+      return phone
+        ? { display: toE164ish(value), url: `https://signal.me/#p/${toE164ish(value)}` }
+        : { display: value, url: null };
+    case "imessage":
+      return { display: phone ? toE164ish(value) : value, url: null };
+    case "sms":
+    case "phone":
+    case "viber":
+      return { display: toE164ish(value), url: null };
+    case "instagram":
+      return {
+        display: `@${value.replace(/^@/, "")}`,
+        url: `https://instagram.com/${stripAt(value)}`,
+      };
+    case "messenger": {
+      const isLink = /(^|\/\/)(m\.me|(www\.)?facebook\.com|(www\.)?messenger\.com)\//i.test(value);
+      const url = isLink
+        ? /^https?:\/\//i.test(value)
+          ? value
+          : `https://${value.replace(/^\/+/, "")}`
+        : `https://m.me/${stripAt(value)}`;
+      return { display: value, url };
+    }
+    case "x":
+      return { display: `@${value.replace(/^@/, "")}`, url: `https://x.com/${stripAt(value)}` };
+    case "line":
+      return { display: value, url: `https://line.me/ti/p/~${stripAt(value)}` };
+    case "discord":
+    case "wechat":
+      return { display: value, url: null };
+    default: {
+      const exhaustive: never = method;
+      return exhaustive;
+    }
+  }
+};
+
 export const inputPropsForKind = (
   kind: HandleKind,
 ): { type: string; inputMode: "email" | "tel" | "text"; autoComplete: string } => {
