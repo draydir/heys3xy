@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 
 import { contactSchema } from "@/lib/contact-schema";
 import { isPostmarkConfigured, sendContactEmail } from "@/lib/postmark";
-import { isTelegramConfigured, sendTelegramMessage } from "@/lib/telegram";
+import {
+  isPersonalTelegramNotifyConfigured,
+  sendPersonalTelegramNotify,
+} from "@/lib/personal-telegram-notify";
 
 export const runtime = "nodejs";
 
@@ -28,10 +31,11 @@ export const POST = async (request: Request) => {
 
   const { name, email, message } = parsed.data;
 
-  if (!isPostmarkConfigured() && !isTelegramConfigured()) {
+  if (!isPostmarkConfigured() && !isPersonalTelegramNotifyConfigured()) {
     return NextResponse.json(
       {
-        error: "Messaging is not configured yet. Add Postmark and/or Telegram env vars on Vercel.",
+        error:
+          "Messaging is not configured yet. Add Postmark and/or NOTIFY_API_SECRET for personal-telegram.",
       },
       { status: 503 },
     );
@@ -46,8 +50,12 @@ export const POST = async (request: Request) => {
   ].join("\n");
 
   const [emailOk, telegram] = await Promise.all([
-    isPostmarkConfigured() ? sendContactEmail({ fromName: name, fromEmail: email, message }) : Promise.resolve(true),
-    isTelegramConfigured() ? sendTelegramMessage(telegramText) : Promise.resolve({ status: "not_configured" as const }),
+    isPostmarkConfigured()
+      ? sendContactEmail({ fromName: name, fromEmail: email, message })
+      : Promise.resolve(true),
+    isPersonalTelegramNotifyConfigured()
+      ? sendPersonalTelegramNotify(telegramText, "heys3xy")
+      : Promise.resolve({ status: "not_configured" as const }),
   ]);
 
   const telegramOk =

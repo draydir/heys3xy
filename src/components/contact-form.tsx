@@ -59,7 +59,7 @@ export const ContactForm = () => {
           TRANSMIT
         </h2>
         <p className="text-xs text-muted-foreground">
-          Encrypted-ish vibes only. Real delivery via Postmark + Telegram when keys land.
+          Postmark to info@heys3xy.com; Telegram via @velocity_thinking_bot hub.
         </p>
       </div>
 
