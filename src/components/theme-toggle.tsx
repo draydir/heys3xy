@@ -26,7 +26,7 @@ export const ThemeToggle = () => {
   if (!mounted) {
     return (
       <div
-        className="h-8 w-[5.75rem] rounded-full border border-border/40 bg-muted/20"
+        className="h-9 w-[6.75rem] rounded-full border border-border/40 bg-muted/20 sm:h-7 sm:w-[5.25rem]"
         aria-hidden
       />
     );
@@ -49,7 +49,7 @@ export const ThemeToggle = () => {
             variant="ghost"
             size="icon-xs"
             className={cn(
-              "rounded-full text-muted-foreground hover:text-foreground",
+              "size-8 rounded-full text-muted-foreground hover:text-foreground sm:size-6",
               isActive && "bg-background text-foreground shadow-sm",
             )}
             onClick={() => setTheme(value)}

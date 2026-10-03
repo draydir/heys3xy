@@ -7,7 +7,9 @@ export const isPostmarkConfigured = (): boolean =>
 
 export const sendContactEmail = async (input: {
   fromName: string;
-  fromEmail: string;
+  methodLabel: string;
+  handle: string;
+  replyTo?: string;
   message: string;
 }): Promise<boolean> => {
   if (!isPostmarkConfigured()) {
@@ -15,9 +17,10 @@ export const sendContactEmail = async (input: {
     return false;
   }
 
-  const subject = `#7399 · message from ${input.fromName}`;
+  const subject = `#7399 · ${input.fromName.replace(/[\r\n]+/g, " ")} via ${input.methodLabel}`;
   const htmlBody = `
-<p><strong>${escapeHtml(input.fromName)}</strong> &lt;${escapeHtml(input.fromEmail)}&gt;</p>
+<p><strong>${escapeHtml(input.fromName)}</strong></p>
+<p>Reach via <strong>${escapeHtml(input.methodLabel)}</strong>: ${escapeHtml(input.handle)}</p>
 <p style="white-space:pre-wrap">${escapeHtml(input.message)}</p>
 <p style="color:#666;font-size:12px">via heys3xy.com contact</p>`;
 
@@ -32,7 +35,7 @@ export const sendContactEmail = async (input: {
       body: JSON.stringify({
         From: FROM_EMAIL,
         To: CONTACT_TO_EMAIL,
-        ReplyTo: input.fromEmail,
+        ...(input.replyTo ? { ReplyTo: input.replyTo } : {}),
         Subject: subject,
         HtmlBody: htmlBody,
         MessageStream: "outbound",
@@ -55,4 +58,5 @@ const escapeHtml = (value: string): string =>
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");

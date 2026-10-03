@@ -7,7 +7,7 @@ export default function Home() {
       <HeroSection />
       <section
         id="contact"
-        className="scroll-mt-16 border-t border-border/40 px-4 py-16"
+        className="scroll-mt-16 border-t border-border/40 px-4 py-12 sm:py-16"
         aria-label="Contact"
       >
         <ContactForm />

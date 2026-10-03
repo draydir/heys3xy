@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 
 import { SiteFooter } from "@/components/site-footer";
@@ -24,6 +24,16 @@ const teslaLike = Montserrat({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://heys3xy.com";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fcfcfc" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -92,7 +102,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM site summary" />
       </head>
-      <body className="flex min-h-svh flex-col bg-background text-foreground">
+      <body className="flex min-h-dvh flex-col bg-background pr-[env(safe-area-inset-right)] pl-[env(safe-area-inset-left)] text-foreground">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <SiteHeader />
           {children}
