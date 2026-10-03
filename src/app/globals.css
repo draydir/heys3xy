@@ -196,3 +196,9 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  .font-tesla {
+    font-family: var(--font-tesla), var(--font-sans), system-ui, sans-serif;
+  }
+}

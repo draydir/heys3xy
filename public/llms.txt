@@ -1,0 +1,24 @@
+# heys3xy.com / #7399
+
+> Single-page site. Primary symbol: #7399.
+
+## Summary
+
+- **7399** on a phone keypad (T9) spells **SEXY** (7=S, 3=E, 9=X, 9=Y).
+- The same letters appear in Tesla’s public model naming: **S**, **3**, **X**, **Y** (often written S3XY).
+- Domain **heys3xy.com** is a spoken pun: “hey” + “sexy” / S3XY.
+- Visual logo: 2×2 grid with S and 3 on row one, X and Y on row two.
+
+## Page structure
+
+- Hero: large `#7399`, 3D loading backdrop, S3XY grid logo.
+- Contact form: POST `/api/contact` (name, email, message). Requires server env for Postmark and/or Telegram.
+- Lexicon section: human-readable explanation for search and assistants.
+
+## API
+
+- `POST /api/contact` — JSON body `{ "name", "email", "message" }`. Honeypot field `company` must be empty.
+
+## Canonical URL
+
+https://heys3xy.com
