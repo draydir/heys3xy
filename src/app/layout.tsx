@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat } from "next/font/google";
+
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { ThemeProvider } from "@/components/theme-provider";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -77,7 +82,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${teslaLike.variable} dark h-full antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} ${teslaLike.variable} h-full antialiased`}
     >
       <head>
         <script
@@ -87,7 +93,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM site summary" />
       </head>
       <body className="flex min-h-svh flex-col bg-background text-foreground">
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </ThemeProvider>
       </body>
     </html>
   );

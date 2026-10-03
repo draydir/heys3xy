@@ -21,7 +21,8 @@ export const HeroSection = () => {
 
   return (
     <section
-      className="relative flex min-h-[72vh] flex-col items-center justify-center overflow-hidden px-4 py-16"
+      id="hero"
+      className="relative flex min-h-[calc(72vh-3.5rem)] flex-col items-center justify-center overflow-hidden px-4 py-16 scroll-mt-16"
       aria-labelledby="hero-heading"
     >
       <Hero3DBackdrop />
