@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# heys3xy · #7399
 
-## Getting Started
+Minimal Next.js page: giant `#7399`, S3XY grid logo, [tweakcn Vercel theme](https://tweakcn.com/editor/theme?theme=vercel), contact form.
 
-First, run the development server:
+## Contact env (Vercel)
+
+Set on project **heys3xy**:
+
+| Variable | Purpose |
+|----------|---------|
+| `POSTMARK_TOKEN` | Postmark server token |
+| `FROM_EMAIL` | Verified Postmark sender |
+| `CONTACT_TO_EMAIL` | Inbox for form submissions |
+| `TELEGRAM_BOT_TOKEN` | Bot for new-message alerts |
+| `TELEGRAM_CHAT_ID` | Chat to notify |
+| `NEXT_PUBLIC_SITE_URL` | Optional; default `https://heys3xy.com` |
+
+Pattern matches provision-admin (`src/lib/postmark.ts`, `src/lib/telegram.ts`): Postmark REST + Telegram `sendMessage`, parallel on submit.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
